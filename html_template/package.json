@@ -1,0 +1,24 @@
+{
+  "name": "compilador",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+
+    "0":"---------------------- Producción -------------------------------------",
+    "html-mini": "html-minifier --input-dir ./src/ --output-dir ./dist/ --remove-comments --collapse-whitespace --minify-css --minify-js --file-ext html",
+    "sass-mini": "sass  --style compressed --no-source-map --no-error-css --load-path=node_modules ./src/assets/scss/main.scss:./dist/assets/css/style.css",
+    "css-prefix": "postcss --replace --no-map ./dist/assets/css/*.css --use autoprefixer",
+    "build": "npm-run-all html-mini sass-mini css-prefix",
+
+    "2":"---------------------- Navegador -------------------------------------",
+    "sass-compile": "sass --no-source-map --watch ./src/assets/scss/main.scss:./src/assets/css/style.css",
+    "browser": "browser-sync start --server --files src --serveStatic src  \"*.js, *.html, *.css\"",
+    "start": "npm-run-all --parallel sass-compile browser"
+  },
+  "browserslist": [
+    "last 3 versions",
+    "> 0.5%",
+    "IE 10"
+  ]
+}
